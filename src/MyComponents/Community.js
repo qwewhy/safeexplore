@@ -9,19 +9,27 @@ import {
   ChevronUp,
   ThumbsUp,
   Share2,
+  PlusCircle,
+  Umbrella,
+  Bus,
+  Utensils,
 } from "lucide-react";
-
 import ForumPost from "./ForumPost";
 
 // 城市背景渐变颜色
 const cityColors = {
-  Sydney: ["#87CEEB", "#1E90FF"], // 浅蓝到深蓝
-  "New York": ["#FF6347", "#8B0000"], // 橙红到深红
-  Beijing: ["#FFD700", "#FF4500"], // 金黄到橙红
-  Tokyo: ["#FF69B4", "#8A2BE2"], // 粉红到紫色
+  Sydney: ["#1E40AF", "#3B82F6"], // 深蓝到亮蓝
+  "New York": ["#B91C1C", "#EF4444"], // 深红到亮红
+  Beijing: ["#B45309", "#F59E0B"], // 深橙到亮橙
+  Tokyo: ["#6B21A8", "#A855F7"], // 深紫到亮紫
 };
 
 // 城市数据 坛帖子与图片
+//The data here should be extracted from the database 
+//by the back-end programmer and presented to the front-end, 
+//but because this project does not require actual deployment 
+//and data transmission for the time being, 
+//the specific data is directly hard-coded in the code.
 const cityData = {
   Sydney: {
     forumPosts: [
@@ -75,6 +83,12 @@ const cityData = {
       { name: "Bondi Beach", checkIns: 98, rating: 4.5 },
       { name: "Taronga Zoo", checkIns: 76, rating: 4.6 },
       { name: "Sydney Harbour Bridge", checkIns: 110, rating: 4.7 },
+      { name: "Royal Botanic Garden", checkIns: 85, rating: 4.6 },
+      { name: "Darling Harbour", checkIns: 120, rating: 4.4 },
+      { name: "The Rocks", checkIns: 70, rating: 4.3 },
+      { name: "Manly Beach", checkIns: 88, rating: 4.5 },
+      { name: "Queen Victoria Building", checkIns: 65, rating: 4.4 },
+      { name: "Art Gallery of New South Wales", checkIns: 55, rating: 4.5 },
     ],
     risks: [
       {
@@ -94,6 +108,24 @@ const cityData = {
         level: "High",
         description:
           "The Australian sun can be intense. Always use sunscreen, wear a hat, and stay hydrated, especially during summer months.",
+      },
+      {
+        title: "Wildlife",
+        level: "Low",
+        description:
+          "While rare in urban areas, be cautious of wildlife like snakes and spiders in parks and bushland.",
+      },
+      {
+        title: "Traffic",
+        level: "Moderate",
+        description:
+          "Remember that Australians drive on the left side of the road. Be extra cautious when crossing streets.",
+      },
+      {
+        title: "Bushfires",
+        level: "Seasonal",
+        description:
+          "During summer months, bushfires can occur in surrounding areas. Stay informed about any warnings or evacuation notices.",
       },
     ],
   },
@@ -141,6 +173,13 @@ const cityData = {
       { name: "Statue of Liberty", checkIns: 203, rating: 4.7 },
       { name: "Central Park", checkIns: 178, rating: 4.9 },
       { name: "Empire State Building", checkIns: 165, rating: 4.6 },
+      { name: "Metropolitan Museum of Art", checkIns: 145, rating: 4.8 },
+      { name: "Broadway", checkIns: 190, rating: 4.8 },
+      { name: "Times Square", checkIns: 220, rating: 4.3 },
+      { name: "High Line", checkIns: 110, rating: 4.5 },
+      { name: "One World Trade Center", checkIns: 130, rating: 4.6 },
+      { name: "Brooklyn Bridge", checkIns: 95, rating: 4.7 },
+      { name: "Rockefeller Center", checkIns: 140, rating: 4.5 },
     ],
     risks: [
       {
@@ -154,6 +193,24 @@ const cityData = {
         level: "High",
         description:
           "New York traffic can be hectic. Always use crosswalks and obey traffic signals when walking.",
+      },
+      {
+        title: "Scams",
+        level: "Moderate",
+        description:
+          "Be wary of common tourist scams, such as fake tickets or overpriced services. Always buy from official sources.",
+      },
+      {
+        title: "Severe Weather",
+        level: "Seasonal",
+        description:
+          "New York can experience severe weather, including heatwaves in summer and snowstorms in winter. Check forecasts and plan accordingly.",
+      },
+      {
+        title: "Noise and Crowds",
+        level: "High",
+        description:
+          "The city can be overwhelming for some visitors due to constant noise and large crowds, especially in tourist areas.",
       },
     ],
   },
@@ -201,6 +258,13 @@ const cityData = {
       { name: "Great Wall of China", checkIns: 245, rating: 4.9 },
       { name: "Forbidden City", checkIns: 189, rating: 4.7 },
       { name: "Temple of Heaven", checkIns: 132, rating: 4.6 },
+      { name: "Summer Palace", checkIns: 156, rating: 4.8 },
+      { name: "Tiananmen Square", checkIns: 178, rating: 4.4 },
+      { name: "Lama Temple", checkIns: 98, rating: 4.5 },
+      { name: "Beijing Zoo", checkIns: 110, rating: 4.2 },
+      { name: "798 Art District", checkIns: 87, rating: 4.3 },
+      { name: "Beihai Park", checkIns: 95, rating: 4.5 },
+      { name: "National Museum of China", checkIns: 76, rating: 4.4 },
     ],
     risks: [
       {
@@ -214,6 +278,30 @@ const cityData = {
         level: "Moderate",
         description:
           "Be wary of 'tea ceremony' scams and unauthorized taxi services. Always use official taxis or ride-hailing apps.",
+      },
+      {
+        title: "Pickpocketing",
+        level: "Moderate",
+        description:
+          "Be cautious in crowded areas and on public transportation. Keep your belongings secure and be aware of your surroundings.",
+      },
+      {
+        title: "Language Barrier",
+        level: "High",
+        description:
+          "English is not widely spoken outside of major tourist areas. Consider using translation apps or carrying a phrasebook.",
+      },
+      {
+        title: "Traffic",
+        level: "High",
+        description:
+          "Traffic in Beijing can be chaotic. Be extremely cautious when crossing streets and always use designated crosswalks.",
+      },
+      {
+        title: "Crowding",
+        level: "High",
+        description:
+          "Popular attractions can get extremely crowded, especially during peak seasons and national holidays. Plan visits accordingly.",
       },
     ],
   },
@@ -261,6 +349,13 @@ const cityData = {
       { name: "Senso-ji Temple", checkIns: 167, rating: 4.7 },
       { name: "Tokyo Skytree", checkIns: 145, rating: 4.5 },
       { name: "Shibuya Crossing", checkIns: 198, rating: 4.6 },
+      { name: "Meiji Shrine", checkIns: 134, rating: 4.7 },
+      { name: "Shinjuku Gyoen National Garden", checkIns: 112, rating: 4.8 },
+      { name: "Tsukiji Outer Market", checkIns: 156, rating: 4.5 },
+      { name: "Akihabara Electric Town", checkIns: 178, rating: 4.4 },
+      { name: "Tokyo Disneyland", checkIns: 210, rating: 4.7 },
+      { name: "Ueno Park", checkIns: 124, rating: 4.5 },
+      { name: "Tokyo National Museum", checkIns: 98, rating: 4.6 },
     ],
     risks: [
       {
@@ -275,8 +370,32 @@ const cityData = {
         description:
           "Tokyo's trains can get extremely crowded during rush hours. Consider avoiding travel during peak times if possible.",
       },
+      {
+        title: "Language Barrier",
+        level: "Moderate",
+        description:
+          "While many signs are in English, not all locals speak it fluently. Consider carrying a translation app or phrasebook.",
+      },
+      {
+        title: "Typhoons",
+        level: "Seasonal",
+        description:
+          "Typhoon season typically runs from June to October. Stay informed about weather forecasts and follow local advisories.",
+      },
+      {
+        title: "Pickpocketing",
+        level: "Low",
+        description:
+          "While Tokyo is generally very safe, be cautious in crowded areas and keep your belongings secure.",
+      },
+      {
+        title: "Cultural Etiquette",
+        level: "Moderate",
+        description:
+          "Japan has specific cultural norms and etiquette. Familiarize yourself with basic customs to avoid unintentional offense.",
+      },
     ],
-  },
+  }
 };
 
 const Community = () => {
@@ -309,8 +428,8 @@ const Community = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100 relative">
-      {/* 背景图片 */}
+    <div className="flex flex-col min-h-screen bg-blue-50 relative">
+      {/* 背景渐变 */}
       <div
         className="absolute inset-0 transition-opacity duration-300 ease-in-out"
         style={{
@@ -320,29 +439,38 @@ const Community = () => {
       ></div>
 
       {/* 半透明遮罩 */}
-      <div className="absolute inset-0 bg-black opacity-50"></div>
+      <div className="absolute inset-0 bg-black opacity-30"></div>
 
       {/* 内容 */}
       <div className="relative z-10 flex flex-col min-h-screen">
         {/* 导航栏 */}
-        <nav className="bg-blue-600 bg-opacity-75 text-white p-4">
+        <nav className="bg-blue-800 text-white p-4 shadow-lg">
           <div className="container mx-auto flex justify-between items-center">
             <h1 className="text-2xl font-bold">SafeTravels</h1>
             <div className="space-x-4">
               <Link
                 to="/"
-                className="hover:underline"
+                className="hover:underline transition duration-300"
                 onClick={handleHomeClick}
               >
                 Home
               </Link>
-              <Link to="/safety-tips" className="hover:underline">
+              <Link
+                to="/safety-tips"
+                className="hover:underline transition duration-300"
+              >
                 Safety Tips
               </Link>
-              <Link to="/community" className="hover:underline">
+              <Link
+                to="/community"
+                className="hover:underline transition duration-300"
+              >
                 Community
               </Link>
-              <Link to="/about" className="hover:underline">
+              <Link
+                to="/about"
+                className="hover:underline transition duration-300"
+              >
                 About
               </Link>
             </div>
@@ -350,7 +478,7 @@ const Community = () => {
         </nav>
 
         {/* 主要内容 */}
-        <main className="flex-grow container mx-auto py-8">
+        <main className="flex-grow container mx-auto py-8 px-4">
           <h1 className="text-4xl font-bold text-center mb-8 text-white">
             Travel Community
           </h1>
@@ -391,6 +519,16 @@ const Community = () => {
               onToggle={() => toggleSection("forum")}
             >
               <div className="space-y-6">
+                {/* 标题和发布新帖子按钮的容器 */}
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-xl font-semibold">Posts</h3>
+                  <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded inline-flex items-center transition duration-300">
+                    <PlusCircle className="mr-2" />
+                    Create New Post
+                  </button>
+                </div>
+
+                {/* 帖子列表 */}
                 {cityData[selectedCity].forumPosts.map((post, index) => (
                   <ForumPost
                     key={index}
@@ -399,6 +537,7 @@ const Community = () => {
                     content={post.content}
                     replies={post.replies}
                     image={post.image}
+                    icon={getPostIcon(post.title)}
                   />
                 ))}
               </div>
@@ -445,7 +584,7 @@ const Community = () => {
         </main>
 
         {/* 页脚 */}
-        <footer className="bg-blue-600 bg-opacity-75 text-white py-4 mt-auto">
+        <footer className="bg-blue-800 text-white py-4 mt-auto">
           <div className="container mx-auto text-center">
             <p>&copy; 2024 SafeTravels. Stay safe, explore confidently.</p>
           </div>
@@ -459,7 +598,7 @@ const Community = () => {
 const CommunitySection = ({ title, icon, children, expanded, onToggle }) => (
   <div className="bg-white shadow rounded-lg overflow-hidden">
     <div
-      className="flex items-center justify-between p-4 cursor-pointer"
+      className="flex items-center justify-between p-4 cursor-pointer bg-blue-100 hover:bg-blue-200 transition duration-300"
       onClick={onToggle}
     >
       <div className="flex items-center space-x-2">
@@ -476,8 +615,19 @@ const CommunitySection = ({ title, icon, children, expanded, onToggle }) => (
   </div>
 );
 
-// 论坛帖子组件
-
+// 根据帖子标题选择图标
+const getPostIcon = (title) => {
+  if (title.toLowerCase().includes("beach"))
+    return <Umbrella className="w-5 h-5" />;
+  if (title.toLowerCase().includes("transport"))
+    return <Bus className="w-5 h-5" />;
+  if (
+    title.toLowerCase().includes("food") ||
+    title.toLowerCase().includes("restaurant")
+  )
+    return <Utensils className="w-5 h-5" />;
+  return <MessageSquare className="w-5 h-5" />;
+};
 
 // 景点卡片组件
 const AttractionCard = ({ name, checkIns, rating }) => (

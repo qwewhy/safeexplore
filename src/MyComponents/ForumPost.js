@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ThumbsUp, Share2 } from 'lucide-react';
+import React, { useState } from "react";
+import { ThumbsUp, Share2 } from "lucide-react";
 
 const ForumPost = ({ title, author, content, replies, image }) => {
   const [likes, setLikes] = useState(0);
@@ -11,16 +11,16 @@ const ForumPost = ({ title, author, content, replies, image }) => {
       <p className="mt-2 text-gray-800">{content}</p>
       {image && (
         <div className="mt-4 max-w-md mx-auto">
-          <img 
-            src={image} 
-            alt={title} 
-            className="rounded-lg w-full h-auto object-cover max-h-40" 
+          <img
+            src={image}
+            alt={title}
+            className="rounded-lg w-full h-auto object-cover max-h-40"
           />
         </div>
       )}
       <div className="mt-4 flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          <button 
+          <button
             onClick={() => setLikes(likes + 1)}
             className="flex items-center space-x-1 text-gray-600 hover:text-blue-500"
           >
