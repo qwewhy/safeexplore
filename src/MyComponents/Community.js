@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { MapPin, AlertTriangle, Camera, MessageSquare, ChevronDown, ChevronUp } from 'lucide-react';
 
-// 城市数据
+// 城市背景渐变颜色
+const cityColors = {
+  Sydney: ['#87CEEB', '#1E90FF'], // 浅蓝到深蓝
+  "New York": ['#FF6347', '#8B0000'], // 橙红到深红
+  Beijing: ['#FFD700', '#FF4500'], // 金黄到橙红
+  Tokyo: ['#FF69B4', '#8A2BE2'] // 粉红到紫色
+};
+
+// 城市数据 坛帖子与图片
 const cityData = {
   Sydney: {
     forumPosts: [
@@ -10,7 +18,8 @@ const cityData = {
         title: "Best beaches in Sydney?",
         author: "BeachLover123",
         content: "I'm visiting Sydney next month and I'm looking for recommendations on the best beaches to visit. Any suggestions?",
-        replies: 5
+        replies: 5,
+        image: "/images/sydney-opera-house.jpg"
       },
       {
         title: "Sydney public transport tips",
@@ -67,7 +76,8 @@ const cityData = {
         title: "Central Park activities",
         author: "NatureLover",
         content: "Spending a day in Central Park. What are some fun activities or spots I shouldn't miss?",
-        replies: 6
+        replies: 6,
+        image:"/images/new-york-skyline.jpg"
       }
     ],
     attractions: [
@@ -94,7 +104,8 @@ const cityData = {
         title: "Great Wall sections to visit?",
         author: "HistoryBuff",
         content: "Which section of the Great Wall is best for a day trip from Beijing?",
-        replies: 7
+        replies: 7,
+        image:"/images/forbidden-city.jpg"
       },
       {
         title: "Beijing street food recommendations",
@@ -158,11 +169,20 @@ const cityData = {
 
 const Community = () => {
   const location = useLocation();
-  // 状态管理：选中的城市和展开的部分
   const [selectedCity, setSelectedCity] = useState('Sydney');
   const [expandedSection, setExpandedSection] = useState(null);
+  const [backgroundOpacity, setBackgroundOpacity] = useState(1);
+  const [backgroundColors, setBackgroundColors] = useState(cityColors[selectedCity]);
 
-  // 处理主页重复点击
+  useEffect(() => {
+    setBackgroundOpacity(0);
+    const timer = setTimeout(() => {
+      setBackgroundColors(cityColors[selectedCity]);
+      setBackgroundOpacity(1);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [selectedCity]);
+
   const handleHomeClick = (e) => {
     if (location.pathname === '/') {
       e.preventDefault();
@@ -170,25 +190,38 @@ const Community = () => {
     }
   };
 
-  // 切换展开/折叠部分
   const toggleSection = (section) => {
     setExpandedSection(expandedSection === section ? null : section);
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      {/* 导航栏 */}
-      <nav className="bg-blue-600 text-white p-4">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold">SafeTravels</h1>
-          <div className="space-x-4">
-            <Link to="/" className="hover:underline" onClick={handleHomeClick}>Home</Link>
-            <Link to="/safety-tips" className="hover:underline">Safety Tips</Link>
-            <Link to="/community" className="hover:underline">Community</Link>
-            <Link to="/about" className="hover:underline">About</Link>
+    <div className="min-h-screen bg-gray-100 relative">
+      {/* 背景图片 */}
+      <div 
+        className="absolute inset-0 transition-opacity duration-300 ease-in-out"
+        style={{
+        background: `linear-gradient(to bottom, ${backgroundColors[0]}, ${backgroundColors[1]})`,
+        opacity: backgroundOpacity
+      }}
+      ></div>
+
+      {/* 半透明遮罩 */}
+      <div className="absolute inset-0 bg-black opacity-50"></div>
+
+      {/* 内容 */}
+      <div className="relative z-10">
+        {/* 导航栏 */}
+        <nav className="bg-blue-600 bg-opacity-75 text-white p-4">
+          <div className="container mx-auto flex justify-between items-center">
+            <h1 className="text-2xl font-bold">SafeTravels</h1>
+            <div className="space-x-4">
+              <Link to="/" className="hover:underline" onClick={handleHomeClick}>Home</Link>
+              <Link to="/safety-tips" className="hover:underline">Safety Tips</Link>
+              <Link to="/community" className="hover:underline">Community</Link>
+              <Link to="/about" className="hover:underline">About</Link>
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
 
       {/* 主要内容 */}
       <main className="container mx-auto py-8">
@@ -209,29 +242,30 @@ const Community = () => {
           </select>
         </div>
 
-        <h2 className="text-3xl font-semibold mb-6">{selectedCity} Community</h2>
+        <h2 className="text-3xl font-semibold mb-6 text-white">{selectedCity} Community</h2>
 
-        {/* 社区部分 */}
-        <div className="space-y-6">
-          {/* 讨论论坛 */}
-          <CommunitySection
-            title="Discussion Forum"
-            icon={<MessageSquare className="w-6 h-6" />}
-            expanded={expandedSection === 'forum'}
-            onToggle={() => toggleSection('forum')}
-          >
-            <div className="space-y-4">
-              {cityData[selectedCity].forumPosts.map((post, index) => (
-                <ForumPost
-                  key={index}
-                  title={post.title}
-                  author={post.author}
-                  content={post.content}
-                  replies={post.replies}
-                />
-              ))}
-            </div>
-          </CommunitySection>
+{/* 社区部分 */}
+<div className="space-y-6">
+  {/* 讨论论坛 */}
+  <CommunitySection
+    title="Discussion Forum"
+    icon={<MessageSquare className="w-6 h-6" />}
+    expanded={expandedSection === 'forum'}
+    onToggle={() => toggleSection('forum')}
+  >
+    <div className="space-y-4">
+      {cityData[selectedCity].forumPosts.map((post, index) => (
+        <ForumPost
+          key={index}
+          title={post.title}
+          author={post.author}
+          content={post.content}
+          replies={post.replies}
+          image={post.image}
+        />
+      ))}
+    </div>
+  </CommunitySection>
 
           {/* 景点打卡 */}
           <CommunitySection
@@ -273,12 +307,13 @@ const Community = () => {
         </div>
       </main>
 
-      {/* 页脚 */}
-      <footer className="bg-blue-600 text-white py-4 mt-12">
-        <div className="container mx-auto text-center">
-          <p>&copy; 2024 SafeTravels. Stay safe, explore confidently.</p>
-        </div>
-      </footer>
+       {/* 页脚 */}
+        <footer className="bg-blue-600 bg-opacity-75 text-white py-4 mt-12">
+          <div className="container mx-auto text-center">
+            <p>&copy; 2024 SafeTravels. Stay safe, explore confidently.</p>
+          </div>
+        </footer>
+      </div>
     </div>
   );
 };
@@ -301,11 +336,20 @@ const CommunitySection = ({ title, icon, children, expanded, onToggle }) => (
 );
 
 // 论坛帖子组件
-const ForumPost = ({ title, author, content, replies }) => (
-  <div className="bg-gray-50 p-4 rounded-lg">
+const ForumPost = ({ title, author, content, replies, image }) => (
+  <div className="bg-white bg-opacity-90 p-4 rounded-lg">
     <h4 className="font-semibold text-lg">{title}</h4>
     <p className="text-sm text-gray-600">Posted by {author}</p>
     <p className="mt-2">{content}</p>
+    {image && (
+      <div className="mt-2 max-w-md mx-auto"> {/* 新增包装 div */}
+        <img 
+          src={image} 
+          alt={title} 
+          className="rounded-lg w-full h-auto object-cover max-h-40" 
+        />
+      </div>
+    )}
     <p className="mt-2 text-sm text-blue-600">{replies} replies</p>
   </div>
 );
