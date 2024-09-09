@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 const SafetyTips = () => {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="flex flex-col min-h-screen bg-gray-100">
       {/* Navigation */}
       <nav className="bg-blue-600 text-white p-4">
         <div className="container mx-auto flex justify-between items-center">
@@ -34,7 +34,7 @@ const SafetyTips = () => {
       </nav>
 
       {/* Main Content */}
-      <main className="container mx-auto py-8">
+      <main className="flex-grow container mx-auto py-8">
         <h1 className="text-4xl font-bold text-center mb-8">
           Travel Safety Tips
         </h1>
@@ -102,7 +102,7 @@ const SafetyTips = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-blue-600 text-white py-4 mt-12">
+      <footer className="bg-blue-600 text-white py-4 mt-auto">
         <div className="container mx-auto text-center">
           <p>&copy; 2024 SafeTravels. Stay safe, explore confidently.</p>
         </div>
