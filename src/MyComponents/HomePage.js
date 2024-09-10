@@ -40,6 +40,9 @@ const HomePage = () => {
             <Link to="/about" className="hover:underline">
               About
             </Link>
+            <Link to="/UnityGame" className="hover:underline">MyIsland</Link>
+            <Link to="/AchievementsPage" className="hover:underline">AchievementsPage</Link>
+            
           </div>
         </div>
       </nav>

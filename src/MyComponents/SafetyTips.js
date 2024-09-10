@@ -29,6 +29,12 @@ const SafetyTips = () => {
             <Link to="/about" className="hover:underline">
               About
             </Link>
+            <Link to="/UnityGame" className="hover:underline">
+              MyIsland
+            </Link>
+            <Link to="/AchievementsPage" className="hover:underline">
+              Achievements
+            </Link>
           </div>
         </div>
       </nav>
