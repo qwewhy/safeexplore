@@ -23,30 +23,6 @@ const HomePage = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
-      {/* Navigation */}
-      <nav className="bg-blue-600 text-white p-4">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold">SafeTravels</h1>
-          <div className="space-x-4">
-            <Link to="/" className="hover:underline" onClick={handleHomeClick}>
-              Home
-            </Link>
-            <Link to="/safety-tips" className="hover:underline">
-              Safety Tips
-            </Link>
-            <Link to="/community" className="hover:underline">
-              Community
-            </Link>
-            <Link to="/about" className="hover:underline">
-              About
-            </Link>
-            <Link to="/UnityGame" className="hover:underline">MyIsland</Link>
-            <Link to="/AchievementsPage" className="hover:underline">AchievementsPage</Link>
-            
-          </div>
-        </div>
-      </nav>
-
       {/* Main content */}
       <main className="flex-grow">
         {/* Hero Section */}
@@ -122,13 +98,6 @@ const HomePage = () => {
           </div>
         </section>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-blue-600 text-white py-8 mt-auto">
-        <div className="container mx-auto text-center">
-          <p>&copy; 2024 SafeTravels. All rights reserved.</p>
-        </div>
-      </footer>
     </div>
   );
 };

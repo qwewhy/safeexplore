@@ -15,6 +15,7 @@ import {
   Utensils,
 } from "lucide-react";
 import ForumPost from "./ForumPost";
+import Layout from './Layout';
 
 // 城市背景渐变颜色
 const cityColors = {
@@ -443,41 +444,6 @@ const Community = () => {
 
       {/* 内容 */}
       <div className="relative z-10 flex flex-col min-h-screen">
-        {/* 导航栏 */}
-        <nav className="bg-blue-800 text-white p-4 shadow-lg">
-          <div className="container mx-auto flex justify-between items-center">
-            <h1 className="text-2xl font-bold">SafeTravels</h1>
-            <div className="space-x-4">
-              <Link
-                to="/"
-                className="hover:underline transition duration-300"
-                onClick={handleHomeClick}
-              >
-                Home
-              </Link>
-              <Link
-                to="/safety-tips"
-                className="hover:underline transition duration-300"
-              >
-                Safety Tips
-              </Link>
-              <Link
-                to="/community"
-                className="hover:underline transition duration-300"
-              >
-                Community
-              </Link>
-              <Link
-                to="/about"
-                className="hover:underline transition duration-300"
-              >
-                About
-              </Link>
-              <Link to="/UnityGame" className="hover:underline">MyIsland</Link>
-              <Link to="/AchievementsPage" className="hover:underline">Achievements</Link>
-            </div>
-          </div>
-        </nav>
 
         {/* 主要内容 */}
         <main className="flex-grow container mx-auto py-8 px-4">
@@ -584,13 +550,6 @@ const Community = () => {
             </CommunitySection>
           </div>
         </main>
-
-        {/* 页脚 */}
-        <footer className="bg-blue-800 text-white py-4 mt-auto">
-          <div className="container mx-auto text-center">
-            <p>&copy; 2024 SafeTravels. Stay safe, explore confidently.</p>
-          </div>
-        </footer>
       </div>
     </div>
   );

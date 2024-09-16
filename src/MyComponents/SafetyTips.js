@@ -12,33 +12,6 @@ import { Link } from "react-router-dom";
 const SafetyTips = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
-      {/* Navigation */}
-      <nav className="bg-blue-600 text-white p-4">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold">SafeTravels</h1>
-          <div className="space-x-4">
-            <Link to="/" className="hover:underline">
-              Home
-            </Link>
-            <Link to="/safety-tips" className="hover:underline">
-              Safety Tips
-            </Link>
-            <Link to="/community" className="hover:underline">
-              Community
-            </Link>
-            <Link to="/about" className="hover:underline">
-              About
-            </Link>
-            <Link to="/UnityGame" className="hover:underline">
-              MyIsland
-            </Link>
-            <Link to="/AchievementsPage" className="hover:underline">
-              Achievements
-            </Link>
-          </div>
-        </div>
-      </nav>
-
       {/* Main Content */}
       <main className="flex-grow container mx-auto py-8">
         <h1 className="text-4xl font-bold text-center mb-8">
@@ -106,13 +79,6 @@ const SafetyTips = () => {
           />
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-blue-600 text-white py-4 mt-auto">
-        <div className="container mx-auto text-center">
-          <p>&copy; 2024 SafeTravels. Stay safe, explore confidently.</p>
-        </div>
-      </footer>
     </div>
   );
 };

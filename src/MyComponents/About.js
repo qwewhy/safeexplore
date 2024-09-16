@@ -13,21 +13,6 @@ const About = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* 导航栏 */}
-      <nav className="bg-blue-800 text-white p-4 shadow-lg">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold">SafeTravels</h1>
-          <div className="space-x-4">
-            <Link to="/" className="hover:underline transition duration-300">Home</Link>
-            <Link to="/safety-tips" className="hover:underline transition duration-300">Safety Tips</Link>
-            <Link to="/community" className="hover:underline transition duration-300">Community</Link>
-            <Link to="/about" className="hover:underline transition duration-300">About</Link>
-            <Link to="/UnityGame" className="hover:underline">MyIsland</Link>
-            <Link to="/AchievementsPage" className="hover:underline">Achievements</Link>
-          </div>
-        </div>
-      </nav>
-
       {/* 主体内容 */}
       <main
         className="flex-grow text-white py-12"
@@ -59,13 +44,6 @@ const About = () => {
           </div>
         </div>
       </main>
-
-      {/* 页脚 */}
-      <footer className="bg-blue-800 text-white py-4 mt-auto">
-        <div className="container mx-auto text-center">
-          <p>&copy; 2024 SafeTravels. Stay safe, explore confidently.</p>
-        </div>
-      </footer>
     </div>
   );
 }

@@ -19,7 +19,7 @@ const Layout = ({ children }) => {
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center">
             <Menu className="w-6 h-6 mr-4" />
-            <h1 className="text-2xl font-bold">SafeTravels</h1>
+            <h1 className="text-2xl font-bold">SafeExplore</h1>
           </div>
           <nav className="hidden md:flex space-x-4">
             <Link to="/" className="hover:underline" onClick={handleHomeClick}>Home</Link>
@@ -39,6 +39,12 @@ const Layout = ({ children }) => {
       </main>
 
       {/* Footer has been removed as it's not present in the image */}
+      {/* 页脚 */}
+      <footer className="bg-blue-800 text-white py-4 mt-auto">
+          <div className="container mx-auto text-center">
+            <p>&copy; 2024 SafeExplore. Stay safe, explore confidently.</p>
+          </div>
+      </footer>
     </div>
   );
 };

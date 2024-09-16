@@ -6,11 +6,12 @@ import Community from './MyComponents/Community';
 import About from './MyComponents/About';
 import UnityGame from './MyComponents/UnityGame';
 import AchievementsPage from './MyComponents/AchievementsPage';
+import Layout from './MyComponents/Layout';
 
 function App() {
   return (
     <Router>
-      <div className="App">
+      <Layout>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/safety-tips" element={<SafetyTips />} />
@@ -18,9 +19,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/UnityGame" element={<UnityGame />}/>
           <Route path="/AchievementsPage" element={<AchievementsPage />}/>
-          
         </Routes>
-      </div>
+      </Layout>
     </Router>
   );
 }
