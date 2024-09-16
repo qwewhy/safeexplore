@@ -5,10 +5,10 @@ import { Menu, Bell, Home, Heart, ShoppingCart, User } from 'lucide-react';
 const Layout = ({ children }) => {
   const location = useLocation();
 
-  const handleHomeClick = (e) => {
-    if (location.pathname === '/') {
+  const handleNavClick = (e, path, pageName) => {
+    if (location.pathname === path) {
       e.preventDefault();
-      alert("This page is home page");
+      alert(`This page is ${pageName} page`);
     }
   };
 
@@ -22,28 +22,61 @@ const Layout = ({ children }) => {
             <h1 className="text-2xl font-bold">SafeExplore</h1>
           </div>
           <nav className="hidden md:flex space-x-4">
-            <Link to="/" className="hover:underline" onClick={handleHomeClick}>Home</Link>
-            <Link to="/safety-tips" className="hover:underline">Safety Tips</Link>
-            <Link to="/community" className="hover:underline">Community</Link>
-            <Link to="/about" className="hover:underline">About</Link>
-            <Link to="/UnityGame" className="hover:underline">MyIsland</Link>
-            <Link to="/AchievementsPage" className="hover:underline">Achievements</Link>
+            <Link
+              to="/"
+              className="hover:underline"
+              onClick={(e) => handleNavClick(e, '/', 'Home')}
+            >
+              Home
+            </Link>
+            <Link
+              to="/safety-tips"
+              className="hover:underline"
+              onClick={(e) => handleNavClick(e, '/safety-tips', 'Safety Tips')}
+            >
+              Safety Tips
+            </Link>
+            <Link
+              to="/community"
+              className="hover:underline"
+              onClick={(e) => handleNavClick(e, '/community', 'Community')}
+            >
+              Community
+            </Link>
+            <Link
+              to="/about"
+              className="hover:underline"
+              onClick={(e) => handleNavClick(e, '/about', 'About')}
+            >
+              About
+            </Link>
+            <Link
+              to="/UnityGame"
+              className="hover:underline"
+              onClick={(e) => handleNavClick(e, '/UnityGame', 'MyIsland')}
+            >
+              MyIsland
+            </Link>
+            <Link
+              to="/AchievementsPage"
+              className="hover:underline"
+              onClick={(e) => handleNavClick(e, '/AchievementsPage', 'Achievements')}
+            >
+              Achievements
+            </Link>
           </nav>
           <Bell className="w-6 h-6" />
         </div>
       </header>
 
       {/* Main content */}
-      <main className="flex-grow">
-        {children}
-      </main>
+      <main className="flex-grow">{children}</main>
 
-      {/* Footer has been removed as it's not present in the image */}
-      {/* 页脚 */}
+      {/* Footer */}
       <footer className="bg-blue-800 text-white py-4 mt-auto">
-          <div className="container mx-auto text-center">
-            <p>&copy; 2024 SafeExplore. Stay safe, explore confidently.</p>
-          </div>
+        <div className="container mx-auto text-center">
+          <p>&copy; 2024 SafeExplore. Stay safe, explore confidently.</p>
+        </div>
       </footer>
     </div>
   );
