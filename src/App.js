@@ -7,6 +7,8 @@ import About from './MyComponents/About';
 import UnityGame from './MyComponents/UnityGame';
 import AchievementsPage from './MyComponents/AchievementsPage';
 import Layout from './MyComponents/Layout';
+import { Rotate3D } from 'lucide-react';
+import LocationOverviewPage from './MyComponents/LocationOverviewPage';
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/UnityGame" element={<UnityGame />}/>
           <Route path="/AchievementsPage" element={<AchievementsPage />}/>
+          <Route path="/LocationOverviewPage" element={<LocationOverviewPage/>}/>
         </Routes>
       </Layout>
     </Router>

@@ -64,6 +64,13 @@ const Layout = ({ children }) => {
             >
               Achievements
             </Link>
+            <Link
+              to="/LocationOverviewPage"
+              className="hover:underline"
+              onClick={(e) => handleNavClick(e, '/LocationOverviewPage', 'LocationOverviewPage')}
+            >
+              LocationOverviewPage
+            </Link>
           </nav>
           <Bell className="w-6 h-6" />
         </div>
