@@ -25,12 +25,6 @@ const cityColors = {
   Tokyo: ["#6B21A8", "#A855F7"], // 深紫到亮紫
 };
 
-// 城市数据 坛帖子与图片
-//The data here should be extracted from the database 
-//by the back-end programmer and presented to the front-end, 
-//but because this project does not require actual deployment 
-//and data transmission for the time being, 
-//the specific data is directly hard-coded in the code.
 const cityData = {
   Sydney: {
     forumPosts: [
@@ -404,23 +398,56 @@ const Community = () => {
   const [selectedCity, setSelectedCity] = useState("Sydney");
   const [expandedSection, setExpandedSection] = useState(null);
   const [backgroundOpacity, setBackgroundOpacity] = useState(1);
-  const [backgroundColors, setBackgroundColors] = useState(
-    cityColors[selectedCity]
-  );
+  const [cityColors, setCityColors] = useState({});
+  const [backgroundColors, setBackgroundColors] = useState([]);
+  const [cityData, setCityData] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setBackgroundOpacity(0);
-    const timer = setTimeout(() => {
-      setBackgroundColors(cityColors[selectedCity]);
-      setBackgroundOpacity(1);
-    }, 300);
-    return () => clearTimeout(timer);
-  }, [selectedCity]);
+    fetchCityData();
+  }, []);
+
+  useEffect(() => {
+    if (cityData[selectedCity] && cityColors[selectedCity]) {
+      setBackgroundOpacity(0);
+      const timer = setTimeout(() => {
+        setBackgroundColors(cityColors[selectedCity]);
+        setBackgroundOpacity(1);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [selectedCity, cityData, cityColors]);
+
+  const fetchCityData = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/api/cities');
+      const data = await response.json();
+      if (data.cityData && data.cityColors) {
+        setCityData(data.cityData);
+        setCityColors(data.cityColors);
+        setBackgroundColors(data.cityColors[selectedCity] || []);
+      } else {
+        console.error('Invalid data structure received from server');
+      }
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching city data:', error);
+      setLoading(false);
+    }
+  };
 
   const handleHomeClick = (e) => {
     if (location.pathname === "/") {
       e.preventDefault();
       alert("This page is home page");
+    }
+  };
+
+  const handleCityChange = (e) => {
+    const newCity = e.target.value;
+    setSelectedCity(newCity);
+    if (cityColors[newCity]) {
+      setBackgroundColors(cityColors[newCity]);
     }
   };
 
@@ -444,111 +471,118 @@ const Community = () => {
 
       {/* 内容 */}
       <div className="relative z-10 flex flex-col min-h-screen">
-
         {/* 主要内容 */}
         <main className="flex-grow container mx-auto py-8 px-4">
           <h1 className="text-4xl font-bold text-center mb-8 text-white">
             Travel Community
           </h1>
 
-          {/* 城市选择器 */}
-          <div className="mb-8">
-            <label
-              htmlFor="city-select"
-              className="block text-sm font-medium text-white mb-2"
-            >
-              Select a city:
-            </label>
-            <select
-              id="city-select"
-              value={selectedCity}
-              onChange={(e) => setSelectedCity(e.target.value)}
-              className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
-            >
-              {Object.keys(cityData).map((city) => (
-                <option key={city} value={city}>
-                  {city}
-                </option>
-              ))}
-            </select>
-          </div>
+          {loading ? (
+            <p className="text-white text-center text-xl">Loading city data...</p>
+          ) : Object.keys(cityData).length > 0 ? (
+            <>
+              {/* 城市选择器 */}
+              <div className="mb-8">
+                <label
+                  htmlFor="city-select"
+                  className="block text-sm font-medium text-white mb-2"
+                >
+                  Select a city:
+                </label>
+                <select
+                  id="city-select"
+                  value={selectedCity}
+                  onChange={handleCityChange}
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  {Object.keys(cityData).map((city) => (
+                    <option key={city} value={city}>
+                      {city}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-          <h2 className="text-3xl font-semibold mb-6 text-white">
-            {selectedCity} Community
-          </h2>
+              <h2 className="text-3xl font-semibold mb-6 text-white">
+                {selectedCity} Community
+              </h2>
 
-          {/* 社区部分 */}
-          <div className="space-y-6">
-            {/* 讨论论坛 */}
-            <CommunitySection
-              title="Discussion Forum"
-              icon={<MessageSquare className="w-6 h-6" />}
-              expanded={expandedSection === "forum"}
-              onToggle={() => toggleSection("forum")}
-            >
+              {/* 社区部分 */}
               <div className="space-y-6">
-                {/* 标题和发布新帖子按钮的容器 */}
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-xl font-semibold">Posts</h3>
-                  <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded inline-flex items-center transition duration-300">
-                    <PlusCircle className="mr-2" />
-                    Create New Post
-                  </button>
-                </div>
+                {/* 讨论论坛 */}
+                <CommunitySection
+                  title="Discussion Forum"
+                  icon={<MessageSquare className="w-6 h-6" />}
+                  expanded={expandedSection === "forum"}
+                  onToggle={() => toggleSection("forum")}
+                >
+                  <div className="space-y-6">
+                    {/* 标题和发布新帖子按钮的容器 */}
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-xl font-semibold">Posts</h3>
+                      <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded inline-flex items-center transition duration-300">
+                        <PlusCircle className="mr-2" />
+                        Create New Post
+                      </button>
+                    </div>
 
-                {/* 帖子列表 */}
-                {cityData[selectedCity].forumPosts.map((post, index) => (
-                  <ForumPost
-                    key={index}
-                    title={post.title}
-                    author={post.author}
-                    content={post.content}
-                    replies={post.replies}
-                    image={post.image}
-                    icon={getPostIcon(post.title)}
-                  />
-                ))}
-              </div>
-            </CommunitySection>
+                    {/* 帖子列表 */}
+                    {cityData[selectedCity]?.forumPosts?.map((post, index) => (
+                      <ForumPost
+                        key={index}
+                        title={post.title}
+                        author={post.author}
+                        content={post.content}
+                        replies={post.replies}
+                        image={post.image}
+                        icon={getPostIcon(post.title)}
+                      />
+                    ))}
+                  </div>
+                </CommunitySection>
 
-            {/* 景点打卡 */}
-            <CommunitySection
-              title="Attraction Check-ins"
-              icon={<Camera className="w-6 h-6" />}
-              expanded={expandedSection === "checkins"}
-              onToggle={() => toggleSection("checkins")}
-            >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {cityData[selectedCity].attractions.map((attraction, index) => (
-                  <AttractionCard
-                    key={index}
-                    name={attraction.name}
-                    checkIns={attraction.checkIns}
-                    rating={attraction.rating}
-                  />
-                ))}
-              </div>
-            </CommunitySection>
+                {/* 景点打卡 */}
+                <CommunitySection
+                  title="Attraction Check-ins"
+                  icon={<Camera className="w-6 h-6" />}
+                  expanded={expandedSection === "checkins"}
+                  onToggle={() => toggleSection("checkins")}
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {cityData[selectedCity]?.attractions?.map((attraction, index) => (
+                      <AttractionCard
+                        key={index}
+                        name={attraction.name}
+                        checkIns={attraction.checkIns}
+                        rating={attraction.rating}
+                      />
+                    ))}
+                  </div>
+                </CommunitySection>
 
-            {/* 风险指南 */}
-            <CommunitySection
-              title={`${selectedCity} Risk Guide`}
-              icon={<AlertTriangle className="w-6 h-6" />}
-              expanded={expandedSection === "riskguide"}
-              onToggle={() => toggleSection("riskguide")}
-            >
-              <div className="space-y-4">
-                {cityData[selectedCity].risks.map((risk, index) => (
-                  <RiskItem
-                    key={index}
-                    title={risk.title}
-                    level={risk.level}
-                    description={risk.description}
-                  />
-                ))}
+                {/* 风险指南 */}
+                <CommunitySection
+                  title={`${selectedCity} Risk Guide`}
+                  icon={<AlertTriangle className="w-6 h-6" />}
+                  expanded={expandedSection === "riskguide"}
+                  onToggle={() => toggleSection("riskguide")}
+                >
+                  <div className="space-y-4">
+                    {cityData[selectedCity]?.risks?.map((risk, index) => (
+                      <RiskItem
+                        key={index}
+                        title={risk.title}
+                        level={risk.level}
+                        description={risk.description}
+                      />
+                    ))}
+                  </div>
+                </CommunitySection>
               </div>
-            </CommunitySection>
-          </div>
+            </>
+          ) : (
+            <p className="text-white text-center text-xl">No city data available.</p>
+          )}
         </main>
       </div>
     </div>

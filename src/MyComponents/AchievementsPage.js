@@ -1,13 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
 import Achievement from "./Achievement";
 import {
   User,
-  Award,
-  Bell,
-  Map,
-  Star,
-  Book,
   Cake,
   Users,
   Camera,
@@ -138,9 +133,41 @@ const achievements = [
 ];
 
 const AchievementsPage = () => {
+  const [achievements, setAchievements] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetchAchievements();
+  }, []);
+
+  const fetchAchievements = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/api/achievements');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setAchievements(data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching achievements:', error);
+      setError('Failed to load achievements. Please try again later.');
+      setLoading(false);
+    }
+  };
+
   const completedAchievements = achievements.filter((a) => a.isAchieved).length;
   const totalAchievements = achievements.length;
-  const progressPercentage = (completedAchievements / totalAchievements) * 100;
+  const progressPercentage = totalAchievements ? (completedAchievements / totalAchievements) * 100 : 0;
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
       <div className="min-h-screen bg-gradient-to-br from-blue-500 to-red-500">

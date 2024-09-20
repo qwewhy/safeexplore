@@ -11,6 +11,9 @@
 		},
 		{
 			"path": "."
+		},
+		{
+			"path": "../SafeExploreBE-NodeJS"
 		}
 	],
 	"settings": {}
