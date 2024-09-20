@@ -65,21 +65,8 @@ const LocationOverviewPage = () => {
           <MapComponent />
         </div>
         
-        {/* Category icons */}
-        <div className="flex justify-between mb-4">
-          {categories.map((category) => (
-            <button
-              key={category}
-              className={`p-2 rounded-full ${selectedCategory === category ? 'bg-white text-blue-600' : 'bg-blue-500 text-white'}`}
-              onClick={() => setSelectedCategory(category)}
-            >
-              <MapPin size={24} />
-            </button>
-          ))}
-        </div>
-        
         {/* Reviews panel */}
-        <div className={`bg-white text-gray-800 rounded-lg shadow-lg ${isPanelMaximized ? 'h-[32rem]' : 'h-96'} overflow-hidden transition-all duration-300`}>
+        <div className={`bg-white text-gray-800 rounded-lg shadow-lg ${isPanelMaximized ? 'h-[32rem]' : 'h-98'} overflow-hidden transition-all duration-300`}>
           <div className="flex justify-between items-center p-4 border-b">
             <h2 className="text-xl font-semibold">User Review</h2>
             <div className="flex items-center space-x-2">
