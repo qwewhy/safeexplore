@@ -8,7 +8,8 @@ const Layout = ({ children }) => {
   const handleNavClick = (e, path, pageName) => {
     if (location.pathname === path) {
       e.preventDefault();
-      alert(`This page is ${pageName} page`);
+      //alert(`This page is ${pageName} page`);
+      alert(`This is an advertisement This is an advertisement This is an advertisement This is an advertisement this is an advertisement this is an advertisement`);
     }
   };
 
