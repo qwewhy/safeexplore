@@ -66,7 +66,6 @@ npm start
 
 - Frontend Framework: React 18
 - UI Components: Lucide React & Tailwind CSS
-- Data: Hardcoded in frontend
 - Development Mode: Local development server
 
 ## 🤝 Contributing
