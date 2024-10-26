@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+# SafeExplore
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
 
-## Available Scripts
+### Your Trusted Travel Safety Companion
 
-In the project directory, you can run:
+</div>
 
-### `npm start`
+## 📖 Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+SafeExplore is dedicated to protecting international travelers from scams and fraudulent activities by providing reliable safety information and resources. Our research shows that over half of international travelers have encountered safety issues and scams while abroad, highlighting the critical need for such safety-focused tools.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ✨ Core Features
 
-### `npm test`
+### 🗺️ Risk Map
+- **Safety Visualization**: Visual representation of safety risk levels
+- **Recommendation System**: Safe attractions and trusted restaurant recommendations
+- **User Interaction**: On-site safety reviews and risk alerts sharing
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 👥 Social Platform
+- **Information Sharing**: Travel experience sharing and safety alerts
+- **Community Interaction**: Group chat and location sharing
+- **Trust System**: Review credibility rating system
 
-### `npm run build`
+### 🏆 Achievement System
+- **Reward Mechanism**: Special titles and points rewards
+- **Task System**: Complete tasks for rewards
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 🏝️ My Island
+- **Personalized Island**: Collect landmarks and decorations
+- **Social Showcase**: Display collection achievements
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 📊 User Research Findings
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Feature Optimization
+- Route planning integration
+- Enhanced team collaboration
+- Interface visual enhancement
+- Navigation experience improvement
 
-### `npm run eject`
+### User Feedback Focus
+- Need for richer visual effects
+- Better group travel features
+- More intuitive safety information display
+- Strong demand for community interaction
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🚀 Quick Start
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Clone the repository
+```bash
+git clone https://github.com/qwewhy/safeexplore.git
+cd safeexplore
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. Install dependencies
+```bash
+npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. Start the development server
+```bash
+npm start
+```
 
-## Learn More
+## 🛠️ Tech Stack
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Frontend Framework: React 18
+- UI Components: Lucide React & Tailwind CSS
+- Data: Hardcoded in frontend
+- Development Mode: Local development server
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🤝 Contributing
 
-### Code Splitting
+We welcome all forms of contributions, whether it's new features, bug fixes, or documentation improvements. Please check [CONTRIBUTING.md](CONTRIBUTING.md) to learn how to get involved.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 📄 License
 
-### Analyzing the Bundle Size
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<div align="center">
+  Made with ❤️ by SafeExplore Team
+</div>
