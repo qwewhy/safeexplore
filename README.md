@@ -3,7 +3,7 @@
 <div align="center">
 
 ### Your Trusted Travel Safety Companion
-![SafeExplore](image.png)
+<img>![SafeExplore](image.png)</img>
 
 </div>
 
